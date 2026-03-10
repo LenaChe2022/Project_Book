@@ -1,0 +1,66 @@
+:root {
+    --light:  #fdf5e4;
+    --almostwhite: #fefbf4;
+    --neutral: #c3a281;
+    --dark:  #422f1b; 
+}
+
+html {
+    background-color: bisque;
+    background-image: -webkit-linear-gradient(65deg, var(--neutral) 50%, var(--light) 50%);
+    min-height: 1000px;
+    font-family: "helvetica neue";
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    min-height: 95vh;
+}
+
+main {
+    text-align: center;
+    /* shrinking and growing of the item in the container */
+    /* flex: flex-grow (1 - is "on". so it is allowed to grow and there is a plenty of space. all items will grow with width of the container)
+                       , flex-shrink  (0 - is "off". so on shrinking items would not be smaller than the basis "auto"
+                                     , basis "auto" means a complex default basis  - it's gonna look at the amount of content in each of the item, so it will give more flex-basis for items with more content, and - the less width for smoller content items*/
+    flex: 1 0 auto;
+}
+
+h1 {
+    color: var(--dark);
+    padding: 10px;
+}
+
+.box {
+    max-width: 800px;
+    margin: 50px auto;
+    background: var(--almostwhite);
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+#heading {
+    background-color: var(--neutral);
+    text-align: center;
+}
+
+form.edit {
+    display: flex;
+}
+
+.item {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.item:last-child {
+    border-bottom: 0;
+}
+
+.bookcover {
+    margin: 20px;
+}
