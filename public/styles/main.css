@@ -63,4 +63,111 @@ form.edit {
 
 .bookcover {
     margin: 20px;
+    
+}
+
+select {
+    margin: 20px 10px;
+    background-color: var(--light);
+    color: var(--dark);
+    font-size: larger;
+    /* padding: 10px; */
+}
+
+label {
+    color: var(--dark);
+    font-size: larger;
+    font-weight: 600;
+}
+
+input {
+    background-color: var(--neutral);
+    border-radius: 5px;
+    border-color: var(--dark);
+    font-size: large;
+}
+
+h2 {
+    color: var(--dark);  
+}
+
+.innerbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.bookinfo {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+a {
+   text-decoration: none; 
+   color: var(--dark);
+}
+
+p {
+    margin: 0;
+    padding: 20px 0;
+    font-size: 20px;
+    color: var(--dark);
+
+}
+
+form {
+    text-align: center;
+    margin-left: 20px;
+}
+
+img {
+    border-radius: 5px;
+}
+
+.maininfo {
+    margin-left: 20px;
+    text-align: left;
+}
+
+.quotes {
+    padding: 0;
+}
+
+button.add {
+    min-height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: #a683e3;
+    color:  #fff;
+    font-size: 30px;
+    border-width: 0;
+}
+
+button.edit {
+    margin-left: 0px;
+    margin-right: 20px;
+    border: none;
+    /* background: none; */
+}
+
+.icon {
+    height: 20px;
+}
+
+input[type="text"] {
+    text-align: left;
+    height: 60px;
+    top: 10px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 200;
+    width: 80%;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: inset 0 -3px 0 0 #a683e3;
 }

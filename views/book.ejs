@@ -1,25 +1,8 @@
 <%- include('partials/header.ejs'); -%>
 
-<div class="box" id="heading">
-    <h1>
-        <%= listTitle %>
-    </h1>
-</div>
 <div class="box">
-    <form class="sorting" action="/" metod="get">
-        <label for="sort">Sort: </label>
-        <select name="sort" id="sort">
-            <option value="ASC">from old to new</option>
-            <option value="DESC">from new to old</option>
-        </select>
-        <input type="submit" value="Submit">
-    </form>
-</div>
-<div class="box">
-  <% for(let item of listItems){%> 
-    <a href="book/<%=item.id%>">
     <div class="item innerbox">
-        <div class="bookitem" id="open<%=item.id%>" onclick="handler('<%=item.id%>')">
+        <div class="bookitem" id="open<%=item.id%>" >
             <div class="bookname">
                 <h2 id="title<%=item.id%>">
                     <%= item.bookName %>
@@ -43,7 +26,18 @@
             </div>
             <div class="booknotes">
                 <% for(let note of item.notes) {%>
-                    <p>"<%= note.note %>"</p>
+                    <!-- <p>"<%= note.note %>"</p> -->
+                    <form class="edit" action="/edit" method="post">
+                        <input type="hidden" name="updatedItemId" value="<%= note.id %>"/>
+                        <input id="input<%=note.id%>" type="text" name="updatedItemTitle" value="<%= note.note %>" autocomplete="off"
+                          autofocus="true" />
+                        <button id="done<%=note.id%>" class="edit" type="submit" hidden>
+                            <img class="icon" src="/assets/icons/check-solid.svg" alt="tick image">
+                        </button>
+                    </form>
+                    <button id="edit<%=note.id%>" class="edit" onclick="handler('<%=note.id%>')">
+                        <img class="icon" src="/assets/icons/pencil-solid.svg" alt="pencil image">
+                    </button>
                 <% } %>
             </div>
         </div>
@@ -57,7 +51,7 @@
             <%= item.bookName %>
         </p> -->
 
-        <form class="edit" action="/edit" method="post">
+        <!-- <form class="edit" action="/edit" method="post">
             <input type="hidden" name="updatedItemId" value="<%= item.id %>"/>
             <input id="input<%=item.id%>" type="text" name="updatedItemTitle" value="<%= item.title%>" autocomplete="off"
               autofocus="true" hidden="true"/>
@@ -67,11 +61,10 @@
         </form>
         <button id="edit<%=item.id%>" class="edit" onclick="handler('<%=item.id%>')">
             <img class="icon" src="/assets/icons/pencil-solid.svg" alt="pencil image">
-        </button>
+        </button> -->
     </div>
-    </a>
-  <% } %>  
 </div>
+
 
 <script>
     function handler(id) {
@@ -85,10 +78,11 @@
     //     document.getElementById("open" + id).addEventListener("click", handleClick(id));
     // }
 
-    function handleClick(id){
-        // alert("I got clicked with id" + id);
-        redirect(`/book${id}`);
-    }
+    // function handleClick(id){
+    //     // alert("I got clicked with id" + id);
+    //     redirect(`/book${id}`);
+    // }
 </script>
+
 
 <%- include('partials/footer.ejs'); -%>

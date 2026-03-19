@@ -27,12 +27,18 @@ let myBooks = [
         bookName: "Holly Bible",
         author: "God",
         dateRead: "01.01.2000",
-        rating: 5,
+        rating: 10,
         cover: "https://blog-cdn.reedsy.com/directories/gallery/326/large_8018faf26dbfa31402f6629c5f5b3c14.png",
         summary: "Worth to read",
         notes: [
-            "good idea",
-            "would read again soon",
+            {
+                id: 0,
+                note: "good idea",
+            },
+            {
+                id: 1,
+                note: "would read again soon",
+            },
         ],
     },
     {
@@ -40,18 +46,25 @@ let myBooks = [
         bookName: "New Bible",
         author: "God",
         dateRead: "01.01.2026",
-        rating: 5,
+        rating: 8,
         cover: "https://blog-cdn.reedsy.com/directories/gallery/326/large_8018faf26dbfa31402f6629c5f5b3c14.png",
         summary: "Worth to read",
         notes: [
-            "First part was better",
+            {
+                id: 0,
+                note: "First part was better",
+            },
         ],
     },
 ];
 
+var sorting = "ASC";
+
 //Main page with all books covers and ratings (must be able to sort books by rating ana recency - I want to do it in query)
 app.get("/", (req,res) => {
     console.log("It works now");
+    console.log(req.query.sort);
+    sorting = req.query.sort;
     res.render("index.ejs", {
         listTitle: "Books I Read",
         listItems: myBooks,
@@ -61,6 +74,15 @@ app.get("/", (req,res) => {
 //add new book
 
 //watch book with all notes
+app.get("/book/:index", (req, res) => {
+    console.log(req.params.index);
+    const bookId = req.params.index;
+    //Later make SQL query to take book with this ID
+    const bookItem = myBooks[bookId];
+    res.render("book.ejs", {
+        item: bookItem,
+    });
+});
 
 //add new note to book
 
