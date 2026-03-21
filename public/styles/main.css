@@ -139,7 +139,7 @@ button.add {
     width: 50px;
     border-radius: 50%;
     border-color: transparent;
-    background-color: #a683e3;
+    background-color: var(--dark);
     color:  #fff;
     font-size: 30px;
     border-width: 0;
@@ -149,11 +149,23 @@ button.edit {
     margin-left: 0px;
     margin-right: 20px;
     border: none;
-    /* background: none; */
+    background: none;
+}
+
+button.delete {
+    margin-left: 0px;
+    margin-right: 20px;
+    border: none;
+    background: none;
 }
 
 .icon {
     height: 20px;
+}
+
+.noteform {
+    display: flex;
+    flex-direction: row;
 }
 
 input[type="text"] {
@@ -164,10 +176,27 @@ input[type="text"] {
     background: transparent;
     font-size: 20px;
     font-weight: 200;
-    width: 80%;
+    min-width: 80%;
+    max-width:fit-content;
+    
 }
 
 input[type="text"]:focus {
     outline: none;
-    box-shadow: inset 0 -3px 0 0 #a683e3;
+    box-shadow: inset 0 -3px 0 0 var(--dark);
+}
+
+::placeholder {
+    color: rgb(82, 50, 50);
+    opacity: 1;
+}
+
+.booknotes {
+    margin-bottom: 20px;
+}
+
+footer {
+    flex: 0 0 auto;
+    color: var(--almostwhite);
+
 }

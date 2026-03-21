@@ -15,19 +15,20 @@
 
                 <div class="maininfo">
                     <h2 id="author<%=item.id%>">
-                        <%= item.author %>
+                       by <%= item.author %>
                     </h2>
                     <h3>Read on <%= item.dateRead %></h3>
-                    <h3>My Summary:</h3>
-                    <p class="quotes">"<%= item.summary%>"</p>
-                    <h3>rate <%= item.rating %>/10</h3>
+                    <!-- <h3>My Summary:</h3> -->
+                    <p class="quotes">My Summary: "<%= item.summary%>"</p>
+                    <h3>My rate <%= item.rating %>/10</h3>
                 </div>
     
             </div>
             <div class="booknotes">
                 <% for(let note of item.notes) {%>
                     <!-- <p>"<%= note.note %>"</p> -->
-                    <form class="edit" action="/edit" method="post">
+                  <div class="noteform">  
+                    <form class="edit" action="/book/edit" method="post">
                         <input type="hidden" name="updatedItemId" value="<%= note.id %>"/>
                         <input id="input<%=note.id%>" type="text" name="updatedItemTitle" value="<%= note.note %>" autocomplete="off"
                           autofocus="true" />
@@ -36,20 +37,21 @@
                         </button>
                     </form>
                     <button id="edit<%=note.id%>" class="edit" onclick="handler('<%=note.id%>')">
-                        <img class="icon" src="/assets/icons/pencil-solid.svg" alt="pencil image">
+                        <img class="icon" src="/assets/icons/pencil-solid.svg" fill="#c3a281" alt="pencil image">
                     </button>
+                    
+                    <form class="edit" action="/book/delete" method="post">
+                        <!-- <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>"> -->
+                        <button id="delete<%=note.id%>" class="delete" action="/book/delete" method="post" onclick="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
+                         <img class="icon" src="/assets/icons/trash-delete-bin.svg"  alt="trash delete bin image" onclick="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
+                        </button>
+                    </form>
+                  </div> 
                 <% } %>
+                
             </div>
         </div>
-        <!-- <img class="bookcover" src="<%= item.cover%>" width="200"> -->
-
-        <form action="/delete" method="post">
-            <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
-        </form>
-
-        <!-- <p id="title<%=item.id%>">
-            <%= item.bookName %>
-        </p> -->
+        
 
         <!-- <form class="edit" action="/edit" method="post">
             <input type="hidden" name="updatedItemId" value="<%= item.id %>"/>
@@ -74,14 +76,6 @@
         document.getElementById("input" + id).removeAttribute("hidden")
     }
 
-    // function handler(id) {
-    //     document.getElementById("open" + id).addEventListener("click", handleClick(id));
-    // }
-
-    // function handleClick(id){
-    //     // alert("I got clicked with id" + id);
-    //     redirect(`/book${id}`);
-    // }
 </script>
 
 
