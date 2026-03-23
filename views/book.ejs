@@ -28,11 +28,11 @@
                 <% for(let note of item.notes) {%>
                     <!-- <p>"<%= note.note %>"</p> -->
                   <div class="noteform">  
-                    <form class="edit" action="/book/edit" method="post">
+                    <form class="edit" action="/book/<%=item.id%>/edit" method="post">
                         <input type="hidden" name="updatedItemId" value="<%= note.id %>"/>
                         <input id="input<%=note.id%>" type="text" name="updatedItemTitle" value="<%= note.note %>" autocomplete="off"
                           autofocus="true" />
-                        <button id="done<%=note.id%>" class="edit" type="submit" hidden>
+                        <button id="done<%=note.id%>" class="edit" type="submit" hidden="true">
                             <img class="icon" src="/assets/icons/check-solid.svg" alt="tick image">
                         </button>
                     </form>
@@ -40,7 +40,7 @@
                         <img class="icon" src="/assets/icons/pencil-solid.svg" fill="#c3a281" alt="pencil image">
                     </button>
                     
-                    <form class="edit" action="/book/delete" method="post">
+                    <form class="edit" action="/book/<%=item.id%>/delete" method="post">
                         <!-- <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>"> -->
                         <button id="delete<%=note.id%>" class="delete" action="/book/delete" method="post" onclick="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
                          <img class="icon" src="/assets/icons/trash-delete-bin.svg"  alt="trash delete bin image" onclick="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
@@ -48,7 +48,7 @@
                     </form>
                   </div> 
                 <% } %>
-                
+
             </div>
         </div>
         

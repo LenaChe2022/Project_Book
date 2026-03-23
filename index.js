@@ -87,6 +87,18 @@ app.get("/book/:index", (req, res) => {
 //add new note to book
 
 //update note
+app.post("/book/:index/edit", (req, res) => {
+    console.log("book index to edit " + req.params.index);
+    console.log(req.body);
+    const i = req.params.index;
+    const n = req.body.updatedItemId;
+    myBooks[i].notes[n].note = req.body.updatedItemTitle;
+    const bookItem = myBooks[i];
+    res.render("book.ejs", {
+        item: bookItem,
+    });
+})
+
 
 //delete note to book
 
