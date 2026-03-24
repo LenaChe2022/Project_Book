@@ -34,10 +34,12 @@ let myBooks = [
             {
                 id: 0,
                 note: "good idea",
+                bookId: 0,
             },
             {
                 id: 1,
                 note: "would read again soon",
+                bookId: 0,
             },
         ],
     },
@@ -53,6 +55,7 @@ let myBooks = [
             {
                 id: 0,
                 note: "First part was better",
+                bookId: 1,
             },
         ],
     },

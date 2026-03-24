@@ -85,10 +85,23 @@ input {
     border-radius: 5px;
     border-color: var(--dark);
     font-size: large;
+    field-sizing: content;
+    max-width: 500px;
+    height: fit-content;
+}
+
+textarea {
+    background-color: var(--almostwhite);
+    border-style: none;
+    font-size: large;
+    width: 500px;
+    min-height: auto;
+    max-height: fit-content;
+    color: var(--dark);
 }
 
 h2 {
-    color: var(--dark);  
+    color: var(--dark);
 }
 
 .innerbox {
@@ -183,6 +196,11 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
+    outline: none;
+    box-shadow: inset 0 -3px 0 0 var(--dark);
+}
+
+textarea[type="text"]:focus {
     outline: none;
     box-shadow: inset 0 -3px 0 0 var(--dark);
 }
