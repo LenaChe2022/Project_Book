@@ -52,7 +52,11 @@ form.edit {
 
 #inputNew {
     width: 50%;
-    font-style: var(--neutral);
+}
+
+input::placeholder {
+    opacity: 0.5;
+    color: var(--dark);
 }
 
 .item {
