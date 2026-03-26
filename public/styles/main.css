@@ -50,6 +50,11 @@ form.edit {
     display: flex;
 }
 
+#inputNew {
+    width: 50%;
+    font-style: var(--neutral);
+}
+
 .item {
     min-height: 70px;
     display: flex;
@@ -85,15 +90,16 @@ input {
     border-radius: 5px;
     border-color: var(--dark);
     font-size: large;
-    field-sizing: content;
-    max-width: 500px;
+    /* field-sizing: content; */
+    
+    /* width: 500px; */
     height: fit-content;
 }
 
 textarea {
     background-color: var(--almostwhite);
     border-style: none;
-    font-size: large;
+    font-size: x-large;
     width: 500px;
     min-height: auto;
     max-height: fit-content;

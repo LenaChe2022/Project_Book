@@ -25,6 +25,20 @@
     
             </div>
             <div class="booknotes">
+                <!-- form to create new note -->
+                <div class="noteform">  
+                    <form class="edit" action="/book/<%=item.id%>/add" method="post">
+                        <!-- <input type="hidden" name="updatedItemId" value="new"/> -->
+                        <input id="inputNew" type="text" name="newNote" placeholder=" + Add new note" autocomplete="off"
+                        autofocus="true"/>
+                      
+                        <button id="done" class="edit" type="submit" >
+                            <img class="icon" src="/assets/icons/check-solid.svg" alt="tick image">
+                        </button>
+                    </form>
+                  
+                </div>
+
                 <% for(let note of item.notes) {%>
                     <!-- <p>"<%= note.note %>"</p> -->
                   <div class="noteform">  
@@ -37,6 +51,7 @@
                         <button id="done<%=note.id%>" class="edit" type="submit" hidden="true">
                             <img class="icon" src="/assets/icons/check-solid.svg" alt="tick image">
                         </button>
+                       
                     </form>
                     <button id="edit<%=note.id%>" class="edit" onclick="handler('<%=note.id%>')">
                         <img class="icon" src="/assets/icons/pencil-solid.svg" fill="#c3a281" alt="pencil image">
@@ -73,6 +88,7 @@
 <script>
     function handler(id) {
         // document.getElementById("title" + id).setAttribute("hidden", true)
+        console.log("Id to handler: " + id);
         document.getElementById("edit" + id).setAttribute("hidden", true)
         document.getElementById("done" + id).removeAttribute("hidden")
         document.getElementById("input" + id).removeAttribute("hidden")

@@ -88,6 +88,29 @@ app.get("/book/:index", (req, res) => {
 });
 
 //add new note to book
+app.post("/book/:index/add", (req, res) => {
+    console.log("add new note " + req.body.newNote + " to book N: " + req.params.index);
+    const newNote = req.body.newNote;
+    const bookId = req.params.index;
+
+    //To replace with DB Query for adding note
+    if (newNote) {
+      const n = myBooks[bookId].notes.length;
+      const noteBD = {
+        id: n,
+        note: newNote,
+        bookId: bookId,
+        }
+      myBooks[req.params.index].notes.push(noteBD);
+    }
+
+
+    const bookItem = myBooks[bookId];
+    console.log(bookItem);
+    res.render("book.ejs", {
+        item: bookItem,
+    });
+});
 
 //update note
 app.post("/book/:index/edit", (req, res) => {
