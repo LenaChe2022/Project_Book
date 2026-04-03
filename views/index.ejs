@@ -49,15 +49,15 @@
         </div>
         <!-- <img class="bookcover" src="<%= item.cover%>" width="200"> -->
 
-        <form action="/delete" method="post">
+        <!-- <form action="/delete" method="post">
             <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
-        </form>
+        </form> -->
 
         <!-- <p id="title<%=item.id%>">
             <%= item.bookName %>
         </p> -->
 
-        <form class="edit" action="/edit" method="post">
+        <!-- <form class="edit" action="/edit" method="post">
             <input type="hidden" name="updatedItemId" value="<%= item.id %>"/>
             <input id="input<%=item.id%>" type="text" name="updatedItemTitle" value="<%= item.title%>" autocomplete="off"
               autofocus="true" hidden="true"/>
@@ -67,11 +67,19 @@
         </form>
         <button id="edit<%=item.id%>" class="edit" onclick="handler('<%=item.id%>')">
             <img class="icon" src="/assets/icons/pencil-solid.svg" alt="pencil image">
-        </button>
+        </button> -->
     </div>
     </a>
   <% } %>  
 </div>
+
+<a href="/add">
+    <div class="box" id="adding">
+        <h2>
+           + Add Book
+        </h2>
+    </div>
+</a>
 
 <script>
     function handler(id) {

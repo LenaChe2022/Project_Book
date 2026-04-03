@@ -2,6 +2,7 @@ import express from "express";
 import pg from "pg";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import axios from "axios";
 
 dotenv.config();
 
@@ -61,6 +62,37 @@ let myBooks = [
     },
 ];
 
+async function getOpenLibraryCover(title, author) {
+    // Search and get cover in one call (if available)
+    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(title)}+${encodeURIComponent(author)}&fields=cover_i,cover_edition_key&limit=1`;
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (data.docs && data.docs[0] && data.docs[0].cover_i) {
+      // cover_i gives you a direct image ID
+      const bookImg = `https://covers.openlibrary.org/b/id/${data.docs[0].cover_i}-L.jpg`;
+      console.log(bookImg);
+      return bookImg;
+    }
+    return null;
+  }
+
+//   async function getOpenLibraryCoverAxios(title, author) {
+//     const generalUrl = `https://openlibrary.org/search.json?q=${encodeURIComponent(author)}+${encodeURIComponent(title)}&fields=key,title,author_name,editions`;
+//     console.log(generalUrl);
+
+//     try {
+//         const response = await axios.get(generalUrl);
+//         const bookResponse = JSON.parse(response);
+//         console.log("what I got on response:   " + bookResponse);
+//         console.log (bookResponse.data.doc[0].editions);
+//         return bookResponse.doc[0].editions.docs[0].key; 
+//     } catch (error) {
+//         console.error("Failed to get book key", error.message);
+//         return "No image";
+//     }
+//   }
+
 var sorting = "ASC";
 
 //Main page with all books covers and ratings (must be able to sort books by rating ana recency - I want to do it in query)
@@ -74,7 +106,69 @@ app.get("/", (req,res) => {
     });
 });
 
-//add new book
+//form to add new book
+app.get("/add", (req, res) => {
+    console.log("Prepare to enter new book");
+    res.render("new_book.ejs");
+});
+
+//add new book (using openlibrary API) 
+app.post("/add", async (req, res) => {
+    console.log("new book object: ");
+    console.log(req.body);
+
+    const author = req.body.author;
+    const title = req.body.bookName;
+
+    //First, I need to get OLID Key number using Author and Book Title
+
+    const generalUrl = `https://openlibrary.org/search.json?q=${encodeURIComponent(author)}+${encodeURIComponent(title)}&fields=key,title,author_name,editions`;
+    console.log(generalUrl);
+
+   
+    try {
+        const response = await axios.get(generalUrl);
+        const bookResponse = response.data;
+        console.log(response);
+        console.log (bookResponse.docs[0].editions);
+        
+        const bookKey = bookResponse.docs[0].editions.docs[0].key;
+        console.log("the key I get  " + bookKey);
+
+        const bookCoverKey = bookKey.replace('/books/', '');
+        
+        //With OLID key value I can get the link to a picture
+        //https://covers.openlibrary.org/b/$key/$value-$size.jpg
+
+        const bookCover = `https://covers.openlibrary.org/b/olid/${bookCoverKey}-L.jpg`;
+        console.log("The book cover reference: " + bookCover);
+
+        const newBook = {
+            id: myBooks.length,
+            bookName: req.body.bookName,
+            author: req.body.author,
+            dateRead: req.body.dateRead,
+            rating: req.body.myRate,
+            cover: bookCover || "https://bookshow.blurb.com/bookshow/cache/P11360640/md/cover_2.jpeg?access_key=675523b769268bce5b0b710b3d0e7841",
+            summary: req.body.mySummary,
+            notes: [],
+        };
+
+        myBooks.push(newBook);
+
+        res.render("index.ejs", {
+            listTitle: "Books I Read",
+            listItems: myBooks,
+        });
+
+        
+    } catch (error) {
+        console.error("Failed to get book key", error.message);
+        return "No image";
+    }
+  
+         
+});
 
 //watch book with all notes
 app.get("/book/:index", (req, res) => {
@@ -127,6 +221,23 @@ app.post("/book/:index/edit", (req, res) => {
 
 
 //delete note to book
+app.post("/book/:index/delete", (req, res) => {
+    console.log("book index to delete note: " + req.params.index);
+    console.log("note index to remove: " + req.body.deleteItemId);
+    const bookId = req.params.index;
+    const noteId = req.body.deleteItemId;
+
+    //replace with DB Query later
+    myBooks[bookId].notes.splice(noteId, 1);
+
+    const bookItem = myBooks[bookId];
+    res.render("book.ejs", {
+        item: bookItem,
+    });
+
+
+});
+
 
 
 app.listen(port, () => {

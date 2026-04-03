@@ -1,0 +1,27 @@
+<%- include('partials/header.ejs'); -%>
+
+<div class="box">
+    <form class="adding" action="/add" method="post">
+        <label for="bookName">Book Name: </label>
+        <input type="text" id="bookName" name="bookName" placeholder="enter the Book name">
+        <br><br>
+        <label for="author">Author: </label>
+        <input type="text" id="author" name="author" placeholder="enter author full name">
+        <br><br>
+        <label for="dateRead">Read on: </label>
+        <input type="date" id="dateRead" name="dateRead" placeholder="MM/DD/YYYY">
+        <br><br>
+        <label for="mySummary">My Summary: </label>
+        <input type="text" id="mySummary" name="mySummary" placeholder="What was this book for you (in few words)">
+        <br><br>
+        <label for="myRate">My Rate: </label>
+        <input type="number" id="myRate" name="myRate" placeholder="rate the book from 1 to 10" min="1" max="10">
+        <br><br>
+        <input type="submit" value="Submit">
+        <br><br>
+    </form>
+    
+</div>
+
+
+<%- include('partials/footer.ejs'); -%>

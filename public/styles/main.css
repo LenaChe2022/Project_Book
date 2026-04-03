@@ -144,6 +144,31 @@ form {
     margin-left: 20px;
 }
 
+.adding {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="date"]{
+    background: transparent;
+    border: none;
+    color:#422f1b;
+    opacity: 0.5;
+    margin-right: 20px;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+input[type="number"]{
+    background: transparent;
+    border: none;
+    color:#422f1b;
+    opacity: 0.8;
+    margin-right: 20px;
+    margin-top: 20px;
+    font-size:larger;
+}
+
 img {
     border-radius: 5px;
 }
@@ -210,9 +235,17 @@ input[type="text"]:focus {
     box-shadow: inset 0 -3px 0 0 var(--dark);
 }
 
+input[type="submit"]{
+    margin-right: 20px;
+}
+
 textarea[type="text"]:focus {
     outline: none;
     box-shadow: inset 0 -3px 0 0 var(--dark);
+}
+
+label{
+    text-align: left;
 }
 
 ::placeholder {
