@@ -29,6 +29,17 @@
                     <!-- <h3>My Summary:</h3> -->
                     <p class="quotes">My Summary: "<%= item.summary%>"</p>
                     <h3>My rate <%= item.rating %>/10</h3>
+
+                    <div class="edition">
+                        <form action="/book/edit/<%=item.id%>" method="get" name="editBookId" value="<%= item.id %>">
+                            <button class="bookEdit" type="submit">Edit</button>
+                        </form>
+                       
+                        <form action="/book/delete/<%=item.id%>" method="post" name="deleteBookId" value="<%= item.id %>">
+                            <button class="bookEdit" id="deleteBook<%=item.id%>" class="" type="submit" >Delete</button>
+                        </form>
+                        <!-- <button id="deleteBook<%=item.id%>" class="" type="submit" >Delete</button> -->
+                    </div>
                 </div>
     
             </div>

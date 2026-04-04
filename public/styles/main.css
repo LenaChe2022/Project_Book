@@ -126,6 +126,13 @@ h2 {
     justify-content: flex-start;
 }
 
+.edition {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
 a {
    text-decoration: none; 
    color: var(--dark);
@@ -206,6 +213,19 @@ button.delete {
     border-radius: 5px;
     border: none;
     background: none;
+}
+
+button.bookEdit {
+    margin-top: 10px;
+    margin-left: 0;
+    border-radius: 5px;
+    border-color: transparent;
+    background-color: var(--neutral);
+    color:  #fff;
+    font-size: 20px;
+    border-width: 0;
+
+
 }
 
 .icon {

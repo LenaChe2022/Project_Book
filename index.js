@@ -170,6 +170,76 @@ app.post("/add", async (req, res) => {
          
 });
 
+//delete a book
+app.post("/book/delete/:index", (req, res) => {
+    console.log("Book to delete: " + req.params.index);
+    const n = req.params.index;
+
+    //delete a bok in DB
+
+    res.redirect('/');
+
+    
+
+});
+
+//page to edit a book
+app.get("/book/edit/:index", (req, res) => {
+    console.log("Book to edit: " + req.params.index);
+
+    const bookId = req.params.index;
+
+    const bookItem = myBooks[bookId];
+
+    res.render("book_edit.ejs", {
+        item: bookItem,
+    });
+
+});
+
+app.post("/book/edit/:index", (req, res) => {
+    console.log("Book to edit: " + req.params.index);
+
+    console.log(req.body);
+
+    const newData = req.body;
+
+    const bookId = req.params.index;
+
+    if (newData.bookName == '') {
+        console.log ("Book Title didn't change");
+    } else {
+        myBooks[bookId].bookName = newData.bookName;
+    }
+
+    if (newData.author == '') {
+        console.log ("Author didn't change");
+    } else {
+        myBooks[bookId].author = newData.author;
+    }
+
+    if (newData.dateRead) {
+        myBooks[bookId].dateRead = newData.dateRead;
+    }
+
+    if (newData.mySummary) {
+        myBooks[bookId].summary = newData.mySummary;
+    }
+
+    if (newData.myRate) {
+        myBooks[bookId].rating = newData.myRate;
+    }
+
+    console.log("New Data of Book " + bookId);
+    console.log(myBooks[bookId]);
+
+    
+
+    res.redirect('/');
+
+});
+
+
 //watch book with all notes
 app.get("/book/:index", (req, res) => {
     console.log(req.params.index);
