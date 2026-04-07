@@ -3,16 +3,20 @@
 <div class="box">
     <form class="adding" action="/book/edit/<%= item.id %>" method="post">
         <label for="bookName">Book Name: </label>
-        <input type="text" id="bookName" name="bookName" placeholder="<%= item.bookName %>">
+        <!-- <input type="text" id="bookName" name="bookName" placeholder="<%= item.bookName %>"> -->
+        <textarea class="forEdit" type="text" name="bookName" value="<%= item.bookName %>" autocomplete="off"
+            autofocus="true"><%= item.bookName %></textarea>
         <br><br>
         <label for="author">Author: </label>
-        <input type="text" id="author" name="author" placeholder="<%= item.author %>">
+        <!-- <input type="text" id="author" name="author" placeholder="<%= item.author %>"> -->
+        <textarea class="forEdit" type="text" name="author" value="<%= item.author %>" autocomplete="off"><%= item.author %></textarea>
         <br><br>
-        <label for="dateRead">Read on: </label>
+        <label for="dateRead">Read on: (was read on <%= item.dateRead %>) </label>
         <input type="date" id="dateRead" name="dateRead" placeholder="<%= item.dateRead %>">
         <br><br>
         <label for="mySummary">My Summary: </label>
-        <input type="text" id="mySummary" name="mySummary" placeholder="<%= item.summary %>">
+        <!-- <input type="text" id="mySummary" name="mySummary" placeholder="<%= item.summary %>"> -->
+        <textarea class="forEdit" type="text" name="mySummary" value="<%= item.summary %>" autocomplete="off"><%= item.summary %></textarea>
         <br><br>
         <label for="myRate">My Rate: </label>
         <input type="number" id="myRate" name="myRate" placeholder="rate the book from 1 to 10.  Your rate was <%= item.rating %>." min="1" max="10">

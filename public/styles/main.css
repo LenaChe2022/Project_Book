@@ -110,6 +110,11 @@ textarea {
     color: var(--dark);
 }
 
+textarea.forEdit {
+    opacity: 50%;
+    margin-top: 15px;
+}
+
 h2 {
     color: var(--dark);
 }
