@@ -22,6 +22,19 @@ db.connect();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+//book sorting by default
+var sorting = "ASC";
+
+//Get all books from db:
+async function getAllBooks(sort) {
+
+    const result = await db.query(`SELECT * FROM books ORDER BY id ${sort}`);
+    const allBooks = result.rows;
+    console.log ("All books in sorting " + sort + ":");
+
+    return allBooks;
+}
+
 let myBooks = [
     {
         id: 0,
@@ -93,13 +106,19 @@ async function getOpenLibraryCover(title, author) {
 //     }
 //   }
 
-var sorting = "ASC";
 
 //Main page with all books covers and ratings (must be able to sort books by rating ana recency - I want to do it in query)
-app.get("/", (req,res) => {
+app.get("/", async (req,res) => {
     console.log("It works now");
     console.log(req.query.sort);
-    sorting = req.query.sort;
+    if (req.query.sort) {
+        sorting = req.query.sort;
+    } else {
+        console.log("sorting by default: " + sorting);
+    }
+    
+    const allBooks = await getAllBooks(sorting);
+    console.log(allBooks);
     res.render("index.ejs", {
         listTitle: "Books I Read",
         listItems: myBooks,
